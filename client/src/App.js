@@ -5,6 +5,9 @@ import SavedList from './Movies/SavedList';
 import MovieList from './Movies/MovieList';
 import Movie from './Movies/Movie';
 
+import './index.css';
+import movies from './movies.jpg';
+
 export default class App extends Component {
   constructor() {
     super();
@@ -22,12 +25,22 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <img className="parallax" src={movies} alt="Movie Theater" />
         <SavedList list={this.state.savedList} />
-        <Route exact path="/" 
-          component={MovieList} />
-        <Route 
-          path="/movies/:id" 
-          render={(props) => <Movie {...props} addToSavedList={this.addToSavedList}/>}
+
+        <Route
+          exact
+          path="/"
+          render={props => (
+            <MovieList {...props} addToSavedList={this.addToSavedList} />
+          )}
+        />
+
+        <Route
+          path="/movies/:id"
+          render={props => (
+            <Movie {...props} addToSavedList={this.addToSavedList} />
+          )}
         />
       </div>
     );
